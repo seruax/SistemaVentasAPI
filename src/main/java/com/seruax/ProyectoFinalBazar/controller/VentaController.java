@@ -6,6 +6,8 @@ import com.seruax.ProyectoFinalBazar.model.Producto;
 import com.seruax.ProyectoFinalBazar.model.Venta;
 import com.seruax.ProyectoFinalBazar.service.VentaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -13,15 +15,19 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class VentasController {
+public class VentaController {
 
     @Autowired
     private VentaService ventaServ;
 
     @PostMapping("/ventas/crear")
-    public String guardarVenta(@RequestBody Venta venta){
-        ventaServ.guardarVenta(venta);
-        return "Venta creada correctamente";
+    public ResponseEntity<String> guardarVenta(@RequestBody Venta venta){
+        try {
+            ventaServ.guardarVenta(venta);
+            return new ResponseEntity<>("Venta creada correctamente", HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Error al crear la venta: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/ventas")

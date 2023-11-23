@@ -5,6 +5,8 @@ import com.seruax.ProyectoFinalBazar.model.Cliente;
 import com.seruax.ProyectoFinalBazar.model.Producto;
 import com.seruax.ProyectoFinalBazar.model.Venta;
 import com.seruax.ProyectoFinalBazar.repository.IVentaRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +17,32 @@ import java.util.Map;
 @Service
 public class VentaService {
 
+    // Sistema de Logging
+    private static final Logger LOGGER = LoggerFactory.getLogger(VentaService.class);
+
     @Autowired
     private IVentaRepository ventaRepo;
 
+    @Autowired
+    private ProductoService productoServ;
+
     public void guardarVenta(Venta venta){
+        List<Producto> listaProductos;
+        listaProductos = venta.getListaProductos();
+        double totalVenta= 0;
+        for (Producto producto: listaProductos){
+            Producto prod = productoServ.traerProducto(producto.getCodigo_producto());
+            if (prod.getCantidad_disponible() >= 1) {
+                prod.setCantidad_disponible(prod.getCantidad_disponible() - 1);
+                productoServ.editarProducto(prod);
+                LOGGER.info("Producto {} actualizado correctamente. Nuevo stock: {}", prod.getNombre(), prod.getCantidad_disponible());
+                totalVenta += prod.getPrecio();
+            } else {
+                LOGGER.error("No hay suficiente stock para el producto: {}", prod.getNombre());
+                throw new RuntimeException("No hay suficiente stock para el producto: " + prod.getNombre());
+            }
+        }
+        venta.setTotal(totalVenta);
         ventaRepo.save(venta);
     }
 
