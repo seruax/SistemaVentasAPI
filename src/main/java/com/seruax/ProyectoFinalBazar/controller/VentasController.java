@@ -40,8 +40,9 @@ public class VentasController {
         return "Venta eliminada correctamente";
     }
 
+    // Modificar venta mediante variables de ruta (PathVariable)
     @PutMapping("/ventas/editar/{codigo_venta}")
-    public Venta editarProducto(@PathVariable Long codigo_venta,
+    public Venta editarVenta(@PathVariable Long codigo_venta,
                                    @RequestParam(required = false, name = "fecha_venta") LocalDate fecha_venta,
                                    @RequestParam(required = false, name = "total") Double total,
                                    @RequestParam(required = false, name = "listaProductos") List<Producto> listaProductos,
@@ -50,8 +51,9 @@ public class VentasController {
         return ventaServ.traerVenta(codigo_venta);
     }
 
+    // Modificar venta mediante RequestBody
     @PutMapping("/ventas/editar")
-    public Venta editarProducto(Venta venta){
+    public Venta editarVenta(@RequestBody Venta venta){
         ventaServ.editarVenta(venta);
         return ventaServ.traerVenta(venta.getCodigo_venta());
     }

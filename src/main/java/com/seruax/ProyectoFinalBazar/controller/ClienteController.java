@@ -35,6 +35,7 @@ public class ClienteController {
         return "Cliente eliminado correctamente";
     }
 
+    // Modificar cliente mediante variables de ruta (PathVariable)
     @PutMapping("/clientes/editar/{id_cliente}")
     public Cliente editarCliente(@PathVariable Long id_cliente,
                                    @RequestParam(required = false, name = "nombre") String nombre,
@@ -44,8 +45,9 @@ public class ClienteController {
         return clienteServ.traerCliente(id_cliente);
     }
 
+    // Modificar cliente mediante RequestBody
     @PutMapping("/clientes/editar")
-    public Cliente editarCliente(Cliente cliente){
+    public Cliente editarCliente(@RequestBody Cliente cliente){
         clienteServ.editarCliente(cliente);
         return clienteServ.traerCliente(cliente.getId_cliente());
     }

@@ -35,6 +35,7 @@ public class ProductoController {
         return "Producto eliminado correctamente";
     }
 
+    // Modificar producto mediante variables de ruta (PathVariable)
     @PutMapping("/productos/editar/{codigo_producto}")
     public Producto editarProducto(@PathVariable Long codigo_producto,
                                  @RequestParam(required = false, name = "nombre") String nombre,
@@ -45,8 +46,9 @@ public class ProductoController {
         return productoServ.traerProducto(codigo_producto);
     }
 
+    // Modificar producto mediante RequestBody
     @PutMapping("/productos/editar")
-    public Producto editarProducto(Producto producto){
+    public Producto editarProducto(@RequestBody Producto producto){
         productoServ.editarProducto(producto);
         return productoServ.traerProducto(producto.getCodigo_producto());
     }
