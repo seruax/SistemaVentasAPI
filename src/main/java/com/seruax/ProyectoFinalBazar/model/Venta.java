@@ -19,7 +19,12 @@ public class Venta {
     private Long codigo_venta;
     private LocalDate fecha_venta;
     private Double total;
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "venta_producto",
+            joinColumns = @JoinColumn(name = "codigo_venta"),
+            inverseJoinColumns = @JoinColumn(name = "codigo_producto")
+    )
     private List<Producto> listaProductos;
     @OneToOne
     private Cliente unCliente;
