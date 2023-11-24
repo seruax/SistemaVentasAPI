@@ -1,8 +1,11 @@
 package com.seruax.ProyectoFinalBazar.controller;
 
+import com.seruax.ProyectoFinalBazar.exception.NoEncontradoException;
 import com.seruax.ProyectoFinalBazar.model.Producto;
 import com.seruax.ProyectoFinalBazar.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,9 +33,13 @@ public class ProductoController {
     }
 
     @DeleteMapping("/productos/eliminar/{codigo_producto}")
-    public String eliminarProducto(@PathVariable Long codigo_producto){
-        productoServ.eliminarProducto(codigo_producto);
-        return "Producto eliminado correctamente";
+    public ResponseEntity<String> eliminarProducto(@PathVariable Long codigo_producto){
+        try {
+            productoServ.eliminarProducto(codigo_producto);
+            return new ResponseEntity<>("Producto eliminado correctamente", HttpStatus.OK);
+        } catch (NoEncontradoException e) {
+            return new ResponseEntity<>("Error al eliminar el producto: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Modificar producto mediante variables de ruta (PathVariable)

@@ -2,6 +2,7 @@ package com.seruax.ProyectoFinalBazar.controller;
 
 import com.seruax.ProyectoFinalBazar.dto.VentaClienteDTO;
 import com.seruax.ProyectoFinalBazar.exception.InsufficientStockException;
+import com.seruax.ProyectoFinalBazar.exception.NoEncontradoException;
 import com.seruax.ProyectoFinalBazar.model.Cliente;
 import com.seruax.ProyectoFinalBazar.model.Producto;
 import com.seruax.ProyectoFinalBazar.model.Venta;
@@ -42,9 +43,13 @@ public class VentaController {
     }
 
     @DeleteMapping("/ventas/eliminar/{codigo_venta}")
-    public String eliminarVenta(@PathVariable Long codigo_venta){
-        ventaServ.eliminarVenta(codigo_venta);
-        return "Venta eliminada correctamente";
+    public ResponseEntity<String> eliminarVenta(@PathVariable Long codigo_venta){
+        try {
+            ventaServ.eliminarVenta(codigo_venta);
+            return new ResponseEntity<>("Venta eliminada correctamente", HttpStatus.OK);
+        } catch (NoEncontradoException e){
+            return new ResponseEntity<>("Error al eliminar la venta: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Modificar venta mediante variables de ruta (PathVariable)

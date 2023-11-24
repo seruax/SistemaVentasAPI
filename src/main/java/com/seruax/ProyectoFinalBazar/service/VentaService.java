@@ -2,6 +2,7 @@ package com.seruax.ProyectoFinalBazar.service;
 
 import com.seruax.ProyectoFinalBazar.dto.VentaClienteDTO;
 import com.seruax.ProyectoFinalBazar.exception.InsufficientStockException;
+import com.seruax.ProyectoFinalBazar.exception.NoEncontradoException;
 import com.seruax.ProyectoFinalBazar.model.Cliente;
 import com.seruax.ProyectoFinalBazar.model.Producto;
 import com.seruax.ProyectoFinalBazar.model.Venta;
@@ -31,7 +32,7 @@ public class VentaService {
         List<Producto> listaProductos;
         listaProductos = venta.getListaProductos();
         double totalVenta= 0;
-        // Comprueba si hay suficiente stock, disminuye la canstidad y calcula el total de la venta
+        // Comprueba si hay suficiente stock, disminuye la cantidad y calcula el total de la venta
         for (Producto producto: listaProductos){
             Producto prod = productoServ.traerProducto(producto.getCodigo_producto());
             if (prod.getCantidad_disponible() >= 1) {
@@ -57,7 +58,16 @@ public class VentaService {
     }
 
     public void eliminarVenta(Long codigo_venta){
-        ventaRepo.deleteById(codigo_venta);
+        // Comprobamos que la venta existe
+        Venta ventaAEliminar = traerVenta(codigo_venta);
+        if (ventaAEliminar != null){
+            // Eliminamos la venta
+            ventaRepo.deleteById(codigo_venta);
+            LOGGER.info("Venta con código {} eliminada correctamente", codigo_venta);
+        } else {
+            LOGGER.info("La venta con código {} no existe", codigo_venta);
+            throw new NoEncontradoException("La venta con id " +  codigo_venta + " no existe");
+        }
     }
 
     public void editarVenta(Long codigo_venta, LocalDate fecha_venta, Double total, List<Producto> listaProductos, Cliente unCliente){

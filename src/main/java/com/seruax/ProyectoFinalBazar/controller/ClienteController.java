@@ -1,8 +1,11 @@
 package com.seruax.ProyectoFinalBazar.controller;
 
+import com.seruax.ProyectoFinalBazar.exception.NoEncontradoException;
 import com.seruax.ProyectoFinalBazar.model.Cliente;
 import com.seruax.ProyectoFinalBazar.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,9 +33,13 @@ public class ClienteController {
     }
 
     @DeleteMapping("/clientes/eliminar/{id_cliente}")
-    public String eliminarCliente(@PathVariable Long id_cliente){
-        clienteServ.eliminarCliente(id_cliente);
-        return "Cliente eliminado correctamente";
+    public ResponseEntity<String> eliminarCliente(@PathVariable Long id_cliente){
+        try {
+            clienteServ.eliminarCliente(id_cliente);
+            return new ResponseEntity<>("Cliente eliminado correctamente", HttpStatus.OK);
+        } catch (NoEncontradoException e) {
+            return new ResponseEntity<>("Error al eliminar el cliente: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Modificar cliente mediante variables de ruta (PathVariable)
