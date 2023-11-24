@@ -1,6 +1,7 @@
 package com.seruax.ProyectoFinalBazar.controller;
 
 import com.seruax.ProyectoFinalBazar.dto.VentaClienteDTO;
+import com.seruax.ProyectoFinalBazar.exception.InsufficientStockException;
 import com.seruax.ProyectoFinalBazar.model.Cliente;
 import com.seruax.ProyectoFinalBazar.model.Producto;
 import com.seruax.ProyectoFinalBazar.model.Venta;
@@ -25,7 +26,7 @@ public class VentaController {
         try {
             ventaServ.guardarVenta(venta);
             return new ResponseEntity<>("Venta creada correctamente", HttpStatus.OK);
-        } catch (RuntimeException e) {
+        } catch (InsufficientStockException e) {
             return new ResponseEntity<>("Error al crear la venta: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }

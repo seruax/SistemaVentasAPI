@@ -1,6 +1,7 @@
 package com.seruax.ProyectoFinalBazar.service;
 
 import com.seruax.ProyectoFinalBazar.dto.VentaClienteDTO;
+import com.seruax.ProyectoFinalBazar.exception.InsufficientStockException;
 import com.seruax.ProyectoFinalBazar.model.Cliente;
 import com.seruax.ProyectoFinalBazar.model.Producto;
 import com.seruax.ProyectoFinalBazar.model.Venta;
@@ -30,6 +31,7 @@ public class VentaService {
         List<Producto> listaProductos;
         listaProductos = venta.getListaProductos();
         double totalVenta= 0;
+        // Comprueba si hay suficiente stock, disminuye la canstidad y calcula el total de la venta
         for (Producto producto: listaProductos){
             Producto prod = productoServ.traerProducto(producto.getCodigo_producto());
             if (prod.getCantidad_disponible() >= 1) {
@@ -39,7 +41,7 @@ public class VentaService {
                 totalVenta += prod.getPrecio();
             } else {
                 LOGGER.error("No hay suficiente stock para el producto: {}", prod.getNombre());
-                throw new RuntimeException("No hay suficiente stock para el producto: " + prod.getNombre());
+                throw new InsufficientStockException("No hay suficiente stock para el producto: " + prod.getNombre());
             }
         }
         venta.setTotal(totalVenta);
