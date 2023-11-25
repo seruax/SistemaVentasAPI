@@ -11,8 +11,6 @@ import java.util.List;
 @Repository
 public interface IProductoRepository extends JpaRepository<Producto, Long> {
 
-//    List<Producto> findByCantidad_disponibleGreaterThan(int stockMinimo);
-
     @Query("SELECT p FROM Producto p WHERE p.cantidad_disponible < :stockMinimo")
     List<Producto> findByCantidadDisponibleMenorQue(@Param("stockMinimo") int stockMinimo);
 

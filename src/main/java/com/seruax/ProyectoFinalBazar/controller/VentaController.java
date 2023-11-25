@@ -88,6 +88,7 @@ public class VentaController {
         LocalDate fecha = LocalDate.parse(fecha_venta);
         return ventaServ.ventasDia( fecha);
     }
+
     // otra manera de hacerlo
 //    @GetMapping("/ventas/dia/{fecha_venta}")
 //    public Map<String, Object> ventasDia(@PathVariable("fecha_venta") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha_venta) {
@@ -95,7 +96,7 @@ public class VentaController {
 //    }
 
     // Obtener el codigo_venta, el total, la cantidad de productos, el nombre del cliente y el
-    //apellido del cliente de la venta con el monto más alto de todas.
+    // apellido del cliente de la venta con el monto más alto de todas.
     @GetMapping("/ventas/mayor_venta")
     public VentaClienteDTO mayorVenta(){
         return ventaServ.mayorVenta();

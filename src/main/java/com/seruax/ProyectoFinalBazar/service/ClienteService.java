@@ -67,6 +67,7 @@ public class ClienteService {
     }
 
     public void editarCliente(Cliente cliente){
+        // Comprobamos que el cliente existe
         if (traerCliente(cliente.getId_cliente()) != null){
             this.guardarCliente(cliente);
         } else {
