@@ -52,8 +52,8 @@ mvn spring-boot:run
 
 **Exploración de la API**:
 - Acceda a los distintos endpoints según las rutas definidas en los controladores.
-- En el código encontrará un archivo de Postman con las solicitudes request más destacadas.
-- Se recomienda rellenar automáticamente la base de datos con datos fake para más comodidad. Realice las siguientes solicitudes GET, dónde {numeroDeRegistros} és un integer que marca la cantidad de registros a crear:
+- En el proyecto, encontrará un archivo de Postman con las solicitudes más destacadas. Importe este archivo en Postman para facilitar la ejecución de solicitudes y la visualización de respuestas.
+- Para simplificar el proceso de prueba, se recomienda utilizar datos ficticios. Ejecute las siguientes solicitudes GET para generar datos ficticios y llenar la base de datos, dónde {numeroDeRegistros} és un integer que marca la cantidad de registros a crear:
 ```sh
 localhost:8080/fakeData/producto/{numeroDeRegistros}
 localhost:8080/fakeData/cliente/{numeroDeRegistros}
