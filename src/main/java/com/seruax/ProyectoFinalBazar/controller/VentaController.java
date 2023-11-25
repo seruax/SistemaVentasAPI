@@ -29,6 +29,8 @@ public class VentaController {
             return new ResponseEntity<>("Venta creada correctamente", HttpStatus.OK);
         } catch (InsufficientStockException e) {
             return new ResponseEntity<>("Error al crear la venta: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (NoEncontradoException e) {
+            return new ResponseEntity<>("Error al crear la venta: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -65,9 +67,13 @@ public class VentaController {
 
     // Modificar venta mediante RequestBody
     @PutMapping("/ventas/editar")
-    public Venta editarVenta(@RequestBody Venta venta){
-        ventaServ.editarVenta(venta);
-        return ventaServ.traerVenta(venta.getCodigo_venta());
+    public ResponseEntity<?> editarVenta(@RequestBody Venta venta){
+        try {
+            ventaServ.editarVenta(venta);
+            return new ResponseEntity<>(ventaServ.traerVenta(venta.getCodigo_venta()), HttpStatus.OK);
+        } catch (NoEncontradoException e) {
+            return new ResponseEntity<>("Error al editar la venta: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Obtener la lista de productos de una determinada venta

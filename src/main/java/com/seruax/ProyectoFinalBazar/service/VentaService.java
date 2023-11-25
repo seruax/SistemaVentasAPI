@@ -32,17 +32,23 @@ public class VentaService {
         List<Producto> listaProductos;
         listaProductos = venta.getListaProductos();
         double totalVenta= 0;
-        // Comprueba si hay suficiente stock, disminuye la cantidad y calcula el total de la venta
+        // Comprueba si el producto existe, si hay suficiente stock, disminuye la cantidad y calcula el total de la venta
         for (Producto producto: listaProductos){
-            Producto prod = productoServ.traerProducto(producto.getCodigo_producto());
-            if (prod.getCantidad_disponible() >= 1) {
-                prod.setCantidad_disponible(prod.getCantidad_disponible() - 1);
-                productoServ.editarProducto(prod);
-                LOGGER.info("Producto {} actualizado correctamente. Nuevo stock: {}", prod.getNombre(), prod.getCantidad_disponible());
-                totalVenta += prod.getPrecio();
+            if (productoServ.traerProducto(producto.getCodigo_producto()) != null) {
+                Producto prod = productoServ.traerProducto(producto.getCodigo_producto());
+                if (prod.getCantidad_disponible() >= 1) {
+                    prod.setCantidad_disponible(prod.getCantidad_disponible() - 1);
+                    productoServ.editarProducto(prod);
+                    LOGGER.info("Producto {} actualizado correctamente. Nuevo stock: {}", prod.getNombre(), prod.getCantidad_disponible());
+                    totalVenta += prod.getPrecio();
+                } else {
+                    LOGGER.error("No hay suficiente stock para el producto: {}", prod.getNombre());
+                    throw new InsufficientStockException("No hay suficiente stock para el producto: " + prod.getNombre());
+                }
             } else {
-                LOGGER.error("No hay suficiente stock para el producto: {}", prod.getNombre());
-                throw new InsufficientStockException("No hay suficiente stock para el producto: " + prod.getNombre());
+                LOGGER.error("No existe ningún producto con id: {}", producto.getCodigo_producto());
+                throw new NoEncontradoException("No se encontró ningún producto con el ID: " + producto.getCodigo_producto() + ". " +
+                        "\nSi deseas consultar la lista completa de productos, realiza una solicitud GET al endpoint \"/productos\".");
             }
         }
         venta.setTotal(totalVenta);
@@ -59,8 +65,7 @@ public class VentaService {
 
     public void eliminarVenta(Long codigo_venta){
         // Comprobamos que la venta existe
-        Venta ventaAEliminar = traerVenta(codigo_venta);
-        if (ventaAEliminar != null){
+        if (traerVenta(codigo_venta) != null){
             // Eliminamos la venta
             ventaRepo.deleteById(codigo_venta);
             LOGGER.info("Venta con código {} eliminada correctamente", codigo_venta);
@@ -82,7 +87,13 @@ public class VentaService {
     }
 
     public void editarVenta(Venta venta){
-        this.guardarVenta(venta);
+        // Comprobamos que la venta existe
+        if (traerVenta(venta.getCodigo_venta()) != null){
+            this.guardarVenta(venta);
+        } else {
+            LOGGER.info("La venta con código {} no existe", venta.getCodigo_venta());
+            throw new NoEncontradoException("La venta con id " +  venta.getCodigo_venta() + " no existe");
+        }
     }
 
     public List<Producto> mostrarProductos(Long codigo_venta){

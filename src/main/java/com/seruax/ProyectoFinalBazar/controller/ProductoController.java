@@ -55,9 +55,13 @@ public class ProductoController {
 
     // Modificar producto mediante RequestBody
     @PutMapping("/productos/editar")
-    public Producto editarProducto(@RequestBody Producto producto){
-        productoServ.editarProducto(producto);
-        return productoServ.traerProducto(producto.getCodigo_producto());
+    public ResponseEntity<?> editarProducto(@RequestBody Producto producto){
+        try {
+            productoServ.editarProducto(producto);
+            return new ResponseEntity<>(productoServ.traerProducto(producto.getCodigo_producto()), HttpStatus.OK);
+        } catch (NoEncontradoException e) {
+            return new ResponseEntity<>("Error al editar el producto: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Obtener lista de productos con cantidad_disponible inferior a X

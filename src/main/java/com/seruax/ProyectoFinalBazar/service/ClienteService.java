@@ -67,7 +67,12 @@ public class ClienteService {
     }
 
     public void editarCliente(Cliente cliente){
-        this.guardarCliente(cliente);
+        if (traerCliente(cliente.getId_cliente()) != null){
+            this.guardarCliente(cliente);
+        } else {
+            LOGGER.info("El cliente con ID {} no existe", cliente.getId_cliente());
+            throw new NoEncontradoException("El cliente con id " + cliente.getId_cliente() + " no existe");
+        }
     }
 
 }

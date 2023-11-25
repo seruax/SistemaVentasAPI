@@ -72,7 +72,13 @@ public class ProductoService {
     }
 
     public void editarProducto(Producto producto){
-        this.guardarProducto(producto);
+        // Comprobamos que el producto existe
+        if (traerProducto(producto.getCodigo_producto()) != null){
+            this.guardarProducto(producto);
+        } else {
+            LOGGER.info("El producto con código {} no existe", producto.getCodigo_producto());
+            throw new NoEncontradoException("El producto con id " + producto.getCodigo_producto() + " no existe");
+        }
     }
 
     public List<Producto> faltaStock(int stockMinimo){

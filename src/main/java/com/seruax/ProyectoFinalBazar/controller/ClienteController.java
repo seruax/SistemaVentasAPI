@@ -54,9 +54,13 @@ public class ClienteController {
 
     // Modificar cliente mediante RequestBody
     @PutMapping("/clientes/editar")
-    public Cliente editarCliente(@RequestBody Cliente cliente){
-        clienteServ.editarCliente(cliente);
-        return clienteServ.traerCliente(cliente.getId_cliente());
+    public ResponseEntity<?> editarCliente(@RequestBody Cliente cliente){
+        try {
+            clienteServ.editarCliente(cliente);
+            return new ResponseEntity<>(clienteServ.traerCliente(cliente.getId_cliente()), HttpStatus.OK);
+        } catch (NoEncontradoException e) {
+            return new ResponseEntity<>("Error al editar el cliente: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
