@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.seruax</groupId>
-	<artifactId>ProyectoFinalBazar</artifactId>
+	<artifactId>SistemaVentasAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ProyectoFinalBazar</name>
+	<name>SistemaVentasAPI</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>

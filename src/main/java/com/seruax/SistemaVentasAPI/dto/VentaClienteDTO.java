@@ -1,4 +1,4 @@
-package com.seruax.ProyectoFinalBazar.dto;
+package com.seruax.SistemaVentasAPI.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

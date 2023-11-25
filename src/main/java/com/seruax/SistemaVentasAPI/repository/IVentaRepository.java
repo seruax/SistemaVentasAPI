@@ -1,6 +1,6 @@
-package com.seruax.ProyectoFinalBazar.repository;
+package com.seruax.SistemaVentasAPI.repository;
 
-import com.seruax.ProyectoFinalBazar.model.Venta;
+import com.seruax.SistemaVentasAPI.model.Venta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

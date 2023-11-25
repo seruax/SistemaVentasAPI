@@ -1,10 +1,10 @@
-package com.seruax.ProyectoFinalBazar.service;
+package com.seruax.SistemaVentasAPI.service;
 
 import com.github.javafaker.Faker;
-import com.seruax.ProyectoFinalBazar.model.Cliente;
-import com.seruax.ProyectoFinalBazar.model.Producto;
-import com.seruax.ProyectoFinalBazar.repository.IClienteRepository;
-import com.seruax.ProyectoFinalBazar.repository.IProductoRepository;
+import com.seruax.SistemaVentasAPI.model.Cliente;
+import com.seruax.SistemaVentasAPI.model.Producto;
+import com.seruax.SistemaVentasAPI.repository.IClienteRepository;
+import com.seruax.SistemaVentasAPI.repository.IProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

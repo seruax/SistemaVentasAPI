@@ -1,13 +1,13 @@
-package com.seruax.ProyectoFinalBazar;
+package com.seruax.SistemaVentasAPI;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProyectoFinalBazarApplication {
+public class SistemaVentasAPIApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProyectoFinalBazarApplication.class, args);
+		SpringApplication.run(SistemaVentasAPIApplication.class, args);
 	}
 
 }

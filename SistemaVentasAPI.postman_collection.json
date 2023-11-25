@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "248c155c-a37d-4cb3-9dca-21875bace00c",
+		"name": "SistemaVentasAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30833092"
+	},
+	"item": [
+		{
+			"name": "Crear un producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Papel higiénico\",\r\n    \"marca\": \"SoftTouch\",\r\n    \"precio\": 2.50,\r\n    \"cantidad_disponible\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/productos/crear",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"productos",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Sergi\",\r\n    \"apellido\": \"Ruax\",\r\n    \"dni\": \"47659228R\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/clientes/crear",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una venta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fecha_venta\": \"2023-11-24\",\r\n    \"listaProductos\": [\r\n        {\r\n            \"codigo_producto\": 1\r\n        },\r\n        {\r\n            \"codigo_producto\": 2\r\n        },\r\n        {\r\n            \"codigo_producto\": 4\r\n        }\r\n    ],\r\n    \"unCliente\": {\r\n        \"id_cliente\": 2\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/ventas/crear",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ventas",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener lista de productos con cantidad_disponible inferior a X",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/productos/falta_stock/10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"productos",
+						"falta_stock",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener la lista de productos de una determinada venta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ventas/productos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ventas",
+						"productos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener la sumatoria del monto y también cantidad total de ventas de un determinado día",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ventas/dia/2023-11-06",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ventas",
+						"dia",
+						"2023-11-06"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener el codigo_venta, el total, la cantidad de productos, el nombre del cliente y el apellido del cliente de la venta con el monto más alto de todas. ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ventas/mayor_venta",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ventas",
+						"mayor_venta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar producto mediante Body",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"codigo_producto\": 7,\n    \"nombre\": \"Arroz Paella 2kg\",\n    \"marca\": \"Arroz Y Delicias\",\n    \"precio\": 5.50,\n    \"cantidad_disponible\": 35\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/productos/editar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"productos",
+						"editar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar cliente mediante Body",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id_cliente\": 1,\n    \"nombre\": \"Sergi\",\n    \"apellido\": \"Ruax Juncadella\",\n    \"dni\": \"47659228R\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/clientes/editar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"editar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar venta mediante Body",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"codigo_venta\": 2,\n    \"fecha_venta\": \"2023-11-25\",\n    \"listaProductos\": [\n        {\n            \"codigo_producto\": 1\n        },\n        {\n            \"codigo_producto\": 2\n        },\n        {\n            \"codigo_producto\": 6\n        }\n    ],\n    \"unCliente\": {\n        \"id_cliente\": 2\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/ventas/editar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ventas",
+						"editar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar cliente por id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/clientes/eliminar/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"eliminar",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar producto por id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/productos/eliminar/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"productos",
+						"eliminar",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar venta por id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ventas/eliminar/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ventas",
+						"eliminar",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear registros fakes de Producto en la BBDD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/fakeData/producto/10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fakeData",
+						"producto",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear registros fakes de Cliente en la BBDD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/fakeData/cliente/10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fakeData",
+						"cliente",
+						"10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

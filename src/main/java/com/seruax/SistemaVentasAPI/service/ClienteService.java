@@ -1,10 +1,10 @@
-package com.seruax.ProyectoFinalBazar.service;
+package com.seruax.SistemaVentasAPI.service;
 
-import com.seruax.ProyectoFinalBazar.exception.NoEncontradoException;
-import com.seruax.ProyectoFinalBazar.model.Cliente;
-import com.seruax.ProyectoFinalBazar.model.Venta;
-import com.seruax.ProyectoFinalBazar.repository.IClienteRepository;
-import com.seruax.ProyectoFinalBazar.repository.IVentaRepository;
+import com.seruax.SistemaVentasAPI.exception.NoEncontradoException;
+import com.seruax.SistemaVentasAPI.model.Cliente;
+import com.seruax.SistemaVentasAPI.model.Venta;
+import com.seruax.SistemaVentasAPI.repository.IClienteRepository;
+import com.seruax.SistemaVentasAPI.repository.IVentaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

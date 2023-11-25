@@ -1,4 +1,4 @@
-package com.seruax.ProyectoFinalBazar.exception;
+package com.seruax.SistemaVentasAPI.exception;
 
 public class InsufficientStockException extends RuntimeException{
 

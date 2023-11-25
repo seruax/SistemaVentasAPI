@@ -1,4 +1,4 @@
-package com.seruax.ProyectoFinalBazar.model;
+package com.seruax.SistemaVentasAPI.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

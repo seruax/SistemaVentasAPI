@@ -1,8 +1,8 @@
-package com.seruax.ProyectoFinalBazar.controller;
+package com.seruax.SistemaVentasAPI.controller;
 
-import com.seruax.ProyectoFinalBazar.exception.NoEncontradoException;
-import com.seruax.ProyectoFinalBazar.model.Producto;
-import com.seruax.ProyectoFinalBazar.service.ProductoService;
+import com.seruax.SistemaVentasAPI.exception.NoEncontradoException;
+import com.seruax.SistemaVentasAPI.model.Producto;
+import com.seruax.SistemaVentasAPI.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
