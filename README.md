@@ -36,7 +36,7 @@ Esta aplicación se ha creado usando las siguientes tecnologias:
 - Asegúrese de tener instalado Java y un IDE compatible con Maven como [IntelliJ] o [NetBeans].
 - Clone este proyecto en su repositorio local: 
 ```sh
-git clone https://github.com/tu-usuario/tu-proyecto.git
+git clone https://github.com/seruax/SistemaVentasAPI.git
 ```
 - Importe el proyecto en su IDE compatible con Maven.
 
