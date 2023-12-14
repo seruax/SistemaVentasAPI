@@ -1,5 +1,5 @@
 # Sistema de Gestión de Ventas
-## _Spring Boot API_
+## _Spring Boot API RESTful_
 #
 ### Descripción del Proyecto
 Esta aplicación, desarrolada en Spring Boot utilizando Spring Data JPA y gestionada con Maven, proporciona una sólida API para la eficiente gestión de un sistema de ventas. Aquí están los aspectos más destacados:
